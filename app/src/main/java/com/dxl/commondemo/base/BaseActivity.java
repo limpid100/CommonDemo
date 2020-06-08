@@ -2,6 +2,8 @@ package com.dxl.commondemo.base;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
@@ -14,7 +16,7 @@ import org.androidannotations.annotations.EActivity;
  * @date : 2020/6/4 9:36 AM
  */
 @EActivity
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
 
     @AfterViews
     public void afterViews(){
