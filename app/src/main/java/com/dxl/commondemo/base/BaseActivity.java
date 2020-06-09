@@ -1,7 +1,5 @@
 package com.dxl.commondemo.base;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.androidannotations.annotations.AfterViews;

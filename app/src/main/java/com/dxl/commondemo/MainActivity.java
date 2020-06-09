@@ -1,12 +1,22 @@
 package com.dxl.commondemo;
 
+import android.util.Log;
+
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.dxl.commondemo.base.BaseActivity;
+import com.dxl.commondemo.net.HttpUtils;
+import com.dxl.commondemo.net.base.Callback;
+import com.dxl.commondemo.net.ln.ProcessFilter;
+import com.dxl.commondemo.net.ln.URLConstant;
+import com.dxl.commondemo.util.NetworkUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * desc   :
@@ -26,6 +36,22 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void bindData() {
+        Map<String, String> map = new HashMap<>(16);
+        map.put("method", URLConstant.API_USER_INFO);
+        map.put("id", "15310");
+        map.put("type", "1");
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IjE1MzEwIg==.09edea542215df256b93c531756be2ac832f7093cf836c21d1486fac0923cec4";
+        HttpUtils.postRequest(ProcessFilter.processParams(token, map), true, this, new Callback<String, String>() {
+            @Override
+            public void onSuccess(String message) {
+                Log.d("dxl", message);
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("dxl", error);
+            }
+        });
 
     }
 

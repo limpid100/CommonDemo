@@ -1,6 +1,8 @@
 package com.dxl.commondemo.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.Handler;
 
 import org.androidannotations.annotations.EApplication;
 
@@ -15,9 +17,26 @@ import org.androidannotations.annotations.EApplication;
 @EApplication
 public class CommonApp extends Application {
 
+    /**
+     * 主线程Handler
+     */
+    private static Handler sHandler;
+
+    public static Handler getMainHandler() {
+        return sHandler;
+    }
+
+    public static Context sAppContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        sAppContext = getApplicationContext();
+        sHandler = new Handler();
     }
+
+    public static Context getAppContext() {
+        return sAppContext;
+    }
+
 }
