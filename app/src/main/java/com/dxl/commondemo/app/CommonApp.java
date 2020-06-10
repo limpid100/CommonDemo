@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.dxl.commondemo.util.DbUtils;
+
 import org.androidannotations.annotations.EApplication;
 
 /**
@@ -33,6 +35,7 @@ public class CommonApp extends Application {
         super.onCreate();
         sAppContext = getApplicationContext();
         sHandler = new Handler();
+        DbUtils.init();
     }
 
     public static Context getAppContext() {

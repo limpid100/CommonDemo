@@ -4,12 +4,14 @@ import android.util.Log;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.dxl.commondemo.adapter.ViewPagerAdapter;
 import com.dxl.commondemo.base.BaseActivity;
 import com.dxl.commondemo.net.HttpUtils;
 import com.dxl.commondemo.net.base.Callback;
 import com.dxl.commondemo.net.ln.ProcessFilter;
 import com.dxl.commondemo.net.ln.URLConstant;
-import com.dxl.commondemo.util.NetworkUtils;
+import com.dxl.commondemo.ui.news.FragmentOne;
+import com.dxl.commondemo.ui.news.FragmentOne_;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.androidannotations.annotations.EActivity;
@@ -68,12 +70,15 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home1:
                     item.setIcon(R.drawable.tab1_s);
+                    viewPager.setCurrentItem(0);
                     break;
                 case R.id.navigation_home2:
                     item.setIcon(R.drawable.tab2_s);
+                    viewPager.setCurrentItem(1);
                     break;
                 case R.id.navigation_home3:
                     item.setIcon(R.drawable.tab3_s);
+                    viewPager.setCurrentItem(2);
                     break;
                 default:
                     break;
@@ -82,5 +87,23 @@ public class MainActivity extends BaseActivity {
         });
         //默认选中第0个
         navigationView.setSelectedItemId(navigationView.getMenu().getItem(0).getItemId());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this);
+        adapter.setFragments(FragmentOne_.newInstance(), FragmentOne.newInstance(), FragmentOne.newInstance());
+        viewPager.setAdapter(adapter);
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                navigationView.setSelectedItemId(navigationView.getMenu().getItem(position).getItemId());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 }
